@@ -1,0 +1,40 @@
+// Testbench
+module tb_ripple_carry_adder_8bit;
+
+reg  [7:0] A;
+reg  [7:0] B;
+reg        Cin;
+wire [7:0] S;
+wire       Cout;
+
+ripple_carry_adder_8bit uut (
+    .A(A),
+    .B(B),
+    .Cin(Cin),
+    .S(S),
+    .Cout(Cout)
+);
+
+initial begin
+    A = 8'b00000001;
+    B = 8'b00000001;
+    Cin = 0;
+    #10;
+    $display("A=%b B=%b Cin=%b S=%b Cout=%b", A, B, Cin, S, Cout);
+
+    A = 8'b00000011;
+    B = 8'b00000001;
+    Cin = 0;
+    #10;
+    $display("A=%b B=%b Cin=%b S=%b Cout=%b", A, B, Cin, S, Cout);
+
+    A = 8'b01010101;
+    B = 8'b00101010;
+    Cin = 0;
+    #10;
+    $display("A=%b B=%b Cin=%b S=%b Cout=%b", A, B, Cin, S, Cout);
+
+    $finish;
+end
+
+endmodule
