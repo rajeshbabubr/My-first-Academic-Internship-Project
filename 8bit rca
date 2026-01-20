@@ -1,0 +1,29 @@
+// 8-bit Ripple Carry Adder
+module ripple_carry_adder_8bit (
+    input  [7:0] A,
+    input  [7:0] B,
+    input        Cin,
+    output [7:0] S,
+    output       Cout
+);
+
+wire [7:0] carry;
+
+full_adder fa0 (A[0], B[0], Cin,      S[0], carry[0]);
+
+genvar i;
+generate
+    for (i = 1; i < 8; i = i + 1) begin : adder_loop
+        full_adder fa (
+            A[i],
+            B[i],
+            carry[i-1],
+            S[i],
+            carry[i]
+        );
+    end
+endgenerate
+
+assign Cout = carry[7];
+
+endmodule
